@@ -15,6 +15,9 @@ bot.onText(/\/stat (.+)/, (msg, match) => {
  const chatId = msg.chat.id;
   const resp = match[1]; // the captured "whatever"
 
+  const mask = "\u{1F637}";
+  const skull = "\u{1F480}";
+  const hospital = "\u{1F3E5}";
   const bot = new TelegramBot(token, {polling: true});
 
   request('https://www.worldometers.info/coronavirus/', (error, response, html) => {
@@ -23,7 +26,7 @@ bot.onText(/\/stat (.+)/, (msg, match) => {
 //to display a specific column from the table
     $('.main_table_countries_div > table > tbody > tr ').each((i, el) => {
       const tds1 = $(el).find("td");
-      
+     
       var TotalDeath = $(tds1[3]).text().replace(/\s\s+/g, '');
       var newCase = $(tds1[2]).text().replace(/\s\s+/g, '');
       var infected = $(tds1[1]).text().replace(/\s\s+/g, '');
@@ -36,14 +39,14 @@ bot.onText(/\/stat (.+)/, (msg, match) => {
       TotalDeath = "0";
       var selectedCountry = match[1];
        if(inCou.toLowerCase() === selectedCountry.toLowerCase()){
-        finalResult = {"country" : inCou,  "  infected ": infected, "new cases" :  newCase, "total death ":TotalDeath};
-        bot.sendMessage(chatId, "country = " + inCou +  "  infected ="+ infected+ "  new cases=" +  newCase+ "  total death ="+TotalDeath);
+        finalResult = {"Country" : inCou,  "\n  Infected ": infected, "\n New Cases" :  newCase, "Total Death ":TotalDeath};
+        bot.sendMessage(chatId, "Country = " + inCou +  "\nInfected "+hospital+" ="+ infected+ "\nNew Cases "+ mask+" =" +  newCase+ "\nTotal Death "+ skull +" ="+TotalDeath);
        console.log(finalResult);
       }
     });
    
 
-    
+   
   }
 });
 
