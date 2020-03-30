@@ -17,5 +17,5 @@
     "start": "node index.js",
     "build": "node index"
 },
-  "heroku-run-build-script": true,
+  "heroku-run-build-script": true
 }
